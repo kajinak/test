@@ -42,7 +42,7 @@ def quadric(request):
             context[name_value] = coefficient.value_int
         else:
             context['error'] = True
-            context[name_value + '_error'] = coefficient.error_massage
+            context[name_value + '_error'] = coefficient.error_message
             context[name_value] = coefficient.value
     if not context['error']:
         a = context['a']
@@ -50,13 +50,13 @@ def quadric(request):
         c = context['c']
         d = get_dis(a, b, c)
         if d < 0:
-            result_massage = "Дискриминант меньше нуля, у уравнения нет действительных корней."
+            result_message = "Дискриминант меньше нуля, у уравнения нет действительных корней."
         elif d == 0:
             x = get_eq_root(a, b, d)
-            result_massage = "Дискриминант равен нулю, квадратное уравнение имеет один корень x1=x2={}".format(x)
+            result_message = "Дискриминант равен нулю, квадратное уравнение имеет один корень x1=x2={}".format(x)
         else:
             x1 = get_eq_root(a, b, d)
             x2 = get_eq_root(a, b, d, order=2)
-            result_massage = "Дискриминант больше нуля, квадратное уравнение имеет два корня x1={}, x2={}".format(x1, x2)
-        context.update({'d': d, 'result_massage': result_massage})
+            result_message = "Дискриминант больше нуля, квадратное уравнение имеет два корня x1={}, x2={}".format(x1, x2)
+        context.update({'d': d, 'result_massage': result_message})
     return render(request, 'quadric.html', context)

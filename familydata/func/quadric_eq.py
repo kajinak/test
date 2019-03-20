@@ -19,20 +19,20 @@ class Coefficient(object):
         self.name = name
         self.value = value
         self.value_int = None
-        self.error_massage = None
+        self.error_message = None
 
     def is_valid(self):
         if not self.value:
-            self.error_massage = "коэффициент не определен"
+            self.error_message = "коэффициент не определен"
             return False
         try:
             self.value_int = int(self.value)
         except ValueError:
-            self.error_massage = "коэффициент не целое число"
+            self.error_message = "коэффициент не целое число"
             return False
 
         if self.name == 'a' and self.value_int == 0:
-            self.error_massage = "коэффициент при а не может быть равен нулю"
+            self.error_message = "коэффициент при а не может быть равен нулю"
             return False
 
         return  True
