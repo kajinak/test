@@ -27,14 +27,19 @@
       <li class="nav-item {% block quadric %}{% endblock quadric %}">
         <a class="nav-link" href="{% url 'quadro' %}">Квадратное уравнение</a>
       </li>
+      <li class="nav-item {% block forms %}{% endblock forms %}">
+        <a class="nav-link" href="{% url 'forms' %}">Формы</a>
+      </li>
     </ul>
   </div>
 </nav>
   {% block main %}
   <div class="jumbotron jumbotron-fluid">
   <div class="container">
+   {% block jumbo %}
     <h1 class="display-4">Наша семья</h1>
     <p class="lead">На этом сайте будут находится некоторые наши данные.</p>
+    {% endblock jumbo %}
   </div>
 </div>
   {% endblock main %}

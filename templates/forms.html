@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% block forms %}active{% endblock forms %}
+{% block jumbo %}<h1>page for forms</h1>
+<p><form method="post">
+    {% csrf_token %}{{ form.as_p }}
+<input type="submit" value="Make GET" />
+</form></p>{% endblock jumbo %}

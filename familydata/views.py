@@ -2,9 +2,10 @@
 
 # Create your views here.
 from familydata.func.quadric_eq import Coefficient, get_dis, get_eq_root
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django import forms
 from familydata.models import Family
+from django.template import RequestContext
 
 
 def home(request):
@@ -60,3 +61,24 @@ def quadric(request):
             result_message = "Дискриминант больше нуля, квадратное уравнение имеет два корня x1={}, x2={}".format(x1, x2)
         context.update({'d': d, 'result_massage': result_message})
     return render(request, 'quadric.html', context)
+
+
+class GetFormsForm(forms.Form):
+    name = forms.CharField(max_length=20)
+    email = forms.EmailField(required=False)
+    package = forms.ChoiceField(choices=(('main','Main'),
+                                         ('half', 'Half'),
+                                         ('simple', 'Simple')))
+    news_suscribe = forms.BooleanField()
+
+
+def get_forms(request):
+    if request.method == "POST":
+        form = GetFormsForm(request.POST)
+        if form.is_valid():
+            form.cleaned_data
+            print("do logic")
+            return redirect('/')
+    else:
+        form = GetFormsForm()
+    return render(request, 'forms.html', {'form': form})

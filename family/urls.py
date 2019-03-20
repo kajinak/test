@@ -24,5 +24,6 @@ urlpatterns = [
     url('^family_list/$', family_list, name='list'),
     url('^news/$', news, name='news'),
     url('^family_list/id=(\d+)/$', detail, name='detail'),
-    url('^quadric/results/', quadric, name='quadro')
+    url('^quadric/results/', quadric, name='quadro'),
+    url('^forms$', get_forms, name='forms'),
 ]
