@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Квадратное уравнение{% endblock title %}
+{% block quadric %}active{% endblock quadric %}
+{% block main %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Квадратное уравнение</h1>
+    <p class="lead">
+      <form>
+      {{ form.as_p }}
+      <input type="submit" value="go!"/>
+      </form>
+    </p>
+
+      {% if not error %}
+      <p>Дискриминант: {{ d }}</p>
+      <p>{{ result_massage }}</p>
+      {% endif %}
+  </div>
+</div>
+{% endblock main %}

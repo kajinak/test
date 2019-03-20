@@ -1,0 +1,36 @@
+ .block1 {
+    position: relative
+    width: 1850px;
+    background: #808080;
+    padding: 15px;
+    padding-right: 70px;
+    border: solid 1px black;
+    left: 30px;
+    color: black;
+    word-spacing: 2em
+   }
+   a {
+   color: black;
+   }
+   .block3 {
+    position: relative;
+    width: 450px;
+    background: #808080;
+    padding: 15px;
+    padding-right: 70px;
+    border: solid 2px black;
+    left: 40em;
+    color:#FFFFFF;
+   }
+table {
+position: relative;
+right: 5em;
+background: green
+}
+td {
+    background: white;
+    }
+a:hover {
+text-decoration: none;
+color: pink
+}

@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Семья{% endblock title %}
+{% block nav_family %}active{% endblock nav_family %}
+
+{% block main %}
+<div class="container theme-showcase" role="main">
+        <div class="page-header">
+            <h2>Наша Семья</h2>
+        </div>
+    <div class="row">
+        <div class="col-md-12">
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr><th>Name</th><th>Surname</th><th>Posittion</th></tr>
+    </thead>
+    <tbody>
+        {% for family in family_list %}
+        <tr>
+          <td>
+            <a class="text-dark" href="{% url 'detail' family.id %}">
+            {{ family.name }}</a>
+          </td>
+          <td>{{ family.surname }}</td>
+            <td>{{ family.posittion }}</td>
+        </tr>
+  {% endfor %}
+    </tbody>
+  </table>
+        </div>
+    </div>
+</div>
+{% endblock main %}
