@@ -5,6 +5,7 @@ from familydata.func.quadric_eq import Coefficient, get_dis, get_eq_root
 from django.shortcuts import render, redirect
 from django import forms
 from familydata.models import Family, FamilyApply
+from django.contrib import messages
 from django.template import RequestContext
 
 
@@ -32,6 +33,7 @@ class QuadraticForm(forms.Form):
     a = forms.CharField(max_length=10)
     b = forms.CharField(max_length=10)
     c = forms.CharField(max_length=10)
+
 
 def quadric(request):
     form = QuadraticForm()
@@ -69,22 +71,26 @@ class GetFormsForm(forms.Form):
     package = forms.ChoiceField(choices=(('main','Main'),
                                          ('half', 'Half'),
                                          ('simple', 'Simple')),
-                                   widget = forms.RadioSelect)
+                                widget=forms.RadioSelect)
     news_subscribe = forms.BooleanField()
+
+
+class ModelGetFormsForm(forms.ModelForm):
+    class Meta:
+        model = FamilyApply
+        exclude = ['date_apply', 'is_active', 'comment']
+        widgets = {'package': forms.RadioSelect}
+        labels = {'email': 'Mail'}
 
 
 def get_forms(request):
     if request.method == "POST":
-        form = GetFormsForm(request.POST)
+        form = ModelGetFormsForm(request.POST)
         if form.is_valid():
-            data = form.cleaned_data
-            family_apply = FamilyApply()
-            family_apply.name = data['name']
-            family_apply.email = data['email']
-            family_apply.package = data['package']
-            family_apply.news_subscribe = data['news_subscribe']
-            family_apply.save()
-            return redirect('/')
+            instance = form.save()
+            messages.success(request, "Saved!")
+            return redirect('/forms')
+
     else:
-        form = GetFormsForm()
+        form = ModelGetFormsForm()
     return render(request, 'forms.html', {'form': form})

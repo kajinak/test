@@ -1,7 +1,17 @@
 {% extends 'base.html' %}
 {% block forms %}active{% endblock forms %}
-{% block jumbo %}<h1>page for forms</h1>
+{% block jumbo %}
+{% if messages %}
+<p><ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}""{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+</p>
+<h1>page for forms</h1>
 <p><form method="post">
     {% csrf_token %}{{ form.as_p }}
 <input type="submit" value="Make GET" />
-</form></p>{% endblock jumbo %}
+</form></p>
+{% endblock jumbo %}
