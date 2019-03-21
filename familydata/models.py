@@ -9,6 +9,19 @@ class Posittion(models.Model):
         return self.name
 
 
+class FamilyApply(models.Model):
+    name = models.CharField(max_length=64)
+    email = models.EmailField(unique=True, null=True)
+    package = models.CharField(max_length=10)
+    news_subscribe = models.BooleanField()
+    comment = models.TextField()
+    is_active = models.BooleanField(default=True)
+    date_apply = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Family(models.Model):
     name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)

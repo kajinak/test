@@ -4,7 +4,7 @@
 from familydata.func.quadric_eq import Coefficient, get_dis, get_eq_root
 from django.shortcuts import render, redirect
 from django import forms
-from familydata.models import Family
+from familydata.models import Family, FamilyApply
 from django.template import RequestContext
 
 
@@ -64,20 +64,26 @@ def quadric(request):
 
 
 class GetFormsForm(forms.Form):
-    name = forms.CharField(max_length=20)
+    name = forms.CharField(max_length=20, help_text='Your name')
     email = forms.EmailField(required=False)
     package = forms.ChoiceField(choices=(('main','Main'),
                                          ('half', 'Half'),
-                                         ('simple', 'Simple')))
-    news_suscribe = forms.BooleanField()
+                                         ('simple', 'Simple')),
+                                   widget = forms.RadioSelect)
+    news_subscribe = forms.BooleanField()
 
 
 def get_forms(request):
     if request.method == "POST":
         form = GetFormsForm(request.POST)
         if form.is_valid():
-            form.cleaned_data
-            print("do logic")
+            data = form.cleaned_data
+            family_apply = FamilyApply()
+            family_apply.name = data['name']
+            family_apply.email = data['email']
+            family_apply.package = data['package']
+            family_apply.news_subscribe = data['news_subscribe']
+            family_apply.save()
             return redirect('/')
     else:
         form = GetFormsForm()
