@@ -7,6 +7,7 @@ from django import forms
 from familydata.models import Family, FamilyApply
 from django.contrib import messages
 from django.template import RequestContext
+from familydata.func.utils import *
 
 
 def home(request):
@@ -75,12 +76,7 @@ class GetFormsForm(forms.Form):
     news_subscribe = forms.BooleanField()
 
 
-class ModelGetFormsForm(forms.ModelForm):
-    class Meta:
-        model = FamilyApply
-        exclude = ['date_apply', 'is_active', 'comment']
-        widgets = {'package': forms.RadioSelect}
-        labels = {'email': 'Mail'}
+
 
 
 def get_forms(request):

@@ -34,7 +34,7 @@ class FamilyApply(models.Model):
 class Family(models.Model):
     name = models.CharField(max_length=64)
     surname = models.CharField(max_length=64)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
     phone_number = models.CharField(max_length=64, null=True, blank=True)
     posittion = models.ForeignKey(Posittion,on_delete=models.CASCADE, null=True)
 

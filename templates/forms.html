@@ -12,6 +12,6 @@
 <h1>page for forms</h1>
 <p><form method="post">
     {% csrf_token %}{{ form.as_p }}
-<input type="submit" value="Make GET" />
+<input type="submit" value="{% block value %}Make POST{% endblock value %}" />
 </form></p>
 {% endblock jumbo %}

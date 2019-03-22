@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from familydata.views import *
+from familydata.func.utils import get_form_edit, delete_form
 
 urlpatterns = [
     url('admin/', admin.site.urls),
@@ -26,4 +27,6 @@ urlpatterns = [
     url('^family_list/id=(\d+)/$', detail, name='detail'),
     url('^quadric/results/', quadric, name='quadro'),
     url('^forms$', get_forms, name='forms'),
+    url('^forms/(?P<pk>\d+)/edit/$', get_form_edit, name='edit'),
+    url('^forms/(?P<pk>\d+)/delete/$', delete_form, name='delete')
 ]
